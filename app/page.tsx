@@ -93,7 +93,7 @@ export default function Home() {
 
   function openWorkspace(name:string) { setActiveNav(name); setNotificationsOpen(false); setOperatorOpen(false); }
   function exportCsv(rowsToExport: Business[], filename: string) {
-    const header = ["Filing","Business","Industry","City","County","Score","Score model","Score breakdown","Opportunity","Stage","Owner","Phone","Website","Contact confidence","Signals","Pipeline status","Origin","Sales brief","Created","Updated"];
+    const header = ["Filing","Business","Industry","City","County","Score","Score model","Score breakdown","Opportunity","Stage","Owner","Phone","Website","Model confidence","Signals","Pipeline status","Origin","Sales brief","Created","Updated"];
     const rows = rowsToExport.map((item) => [
       item.filing_number,item.name,item.industry,item.city,item.county,item.score,item.score_breakdown.model,
       item.score_breakdown.components.map((part)=>`${part.label}: ${part.points} (${part.evidence})`).join(" | "),
@@ -225,7 +225,7 @@ function LeadDrawer({business,busy,close,claim,generate}:{business:Business;busy
       <p className="eyebrow">Complete business profile</p>
       <h2>{business.name}</h2>
       <p className="drawer-subtitle">{business.industry} · {business.city}, Florida</p>
-      <div className="drawer-score"><div className="score score-high">{business.score}</div><span><strong>Priority score</strong><small>{business.confidence}% contact confidence · no hidden factors</small></span></div>
+      <div className="drawer-score"><div className="score score-high">{business.score}</div><span><strong>Priority score</strong><small>{business.confidence}% model confidence · contact fields shown separately · no hidden factors</small></span></div>
       <div className="profile-grid">
         <span><small>Business stage</small><strong>{business.stage}</strong></span>
         <span><small>Pipeline status</small><strong>{business.pipeline_status}</strong></span>
